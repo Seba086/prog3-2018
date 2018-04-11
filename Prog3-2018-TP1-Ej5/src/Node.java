@@ -20,7 +20,7 @@ public class Node {
 		next = n;
 	}
 
-	public Object getInfo() {
+	public int getInfo() {
 		return info;
 	}
 
