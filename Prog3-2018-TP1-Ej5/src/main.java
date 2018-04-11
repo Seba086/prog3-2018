@@ -12,25 +12,25 @@ public class main {
 
 		MySimpleLinkedList l1 = new MySimpleLinkedList();
 		MySimpleLinkedList l2 = new MySimpleLinkedList();
-		MySimpleLinkedList simpleCommonElements = new MySimpleLinkedList();
+		MySimpleLinkedList l3 = new MySimpleLinkedList();
+		int infoNumbers1[] = {5,7,3,15,33};
+		int infoNumbers2[] = {23,1,17,9,44};
 		
 		Timer t = new Timer();
 		int rnd;
 
 		for (int i=0; i<5; i++) {
-			rnd = (int) ((Math.random()*10)+1);
-			l1.insertAtLast(rnd);
-			rnd = (int) ((Math.random()*10)+1);
-			l2.insertAtLast(rnd);
+			l1.insertAtLast(infoNumbers1[i]);
+			l2.insertAtLast(infoNumbers2[i]);
 		}
 		l1.print(5);
 		System.out.println("l1: " + l1.getSize());
 		l2.print(5);
 		System.out.println("l2 size: " + l2.getSize());
 		
-		simpleCommonElements = simpleCommonElements.mergeLists(l1, l2);
-		simpleCommonElements.print(50);
-		System.out.println("simpleCommonElements size: " + simpleCommonElements.getSize());
+		l3 = l3.simpleCommonElements(l1, l2);
+		l3.print(l1.getSize() + l2.getSize());
+		System.out.println("simpleCommonElements size: " + l3.getSize());
 	}
 
 }

@@ -116,6 +116,8 @@ public class MySimpleLinkedList {
 
 		MySimpleLinkedList simpleCommonElements = new MySimpleLinkedList();
 		simpleCommonElements = simpleCommonElements.mergeLists(l1, l2);
+		
+		
 		return simpleCommonElements;
 	}
 
