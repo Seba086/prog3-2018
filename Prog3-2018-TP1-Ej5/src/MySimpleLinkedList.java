@@ -25,21 +25,40 @@ public class MySimpleLinkedList {
 
 	}
 
+	public boolean exists(int n) {
+		Node tmp = first;
+
+		while ((tmp.getInfo() != last.getInfo()) || (tmp.getInfo() == n)) {
+			if (tmp.getInfo() == n) {
+				return true;
+			}
+
+			if (tmp.getNext() != null) {
+				tmp = tmp.getNext();
+			}
+
+		}
+		return false;
+
+	}
+
 	public void insertAtLast(int n) {
 		Node tmp = new Node(n, null); // Creo el nodo a insertar, le seteo null como next
+
 		if (first == null) {
 			first = tmp;
 			last = first;
-		} else if (size == 1) {
-				first.setNext(tmp);
-				last = tmp;
-			}
-		else {
+			size++;
+		} else {
+			if (!(this.exists(n))) {
 				last.setNext(tmp);
 				last = tmp;
+				size++;
 			}
-		size++;
+		}
+		
 	}
+
 
 	public Object extractLast() {
 		Node tmp = last;
@@ -65,7 +84,7 @@ public class MySimpleLinkedList {
 		return tmp;
 	}
 
-	public Node elementAtPos(int pos) {
+	public Node nodeAt(int pos) {
 		Node tmp = first;
 		int listPos = 0;
 		while ((tmp.getNext() != null) && (pos != listPos)) {
@@ -114,36 +133,36 @@ public class MySimpleLinkedList {
 		// Le aplico MergeSort
 		// Devuelvo la lista auxiliar
 
-		MySimpleLinkedList simpleCommonElements = new MySimpleLinkedList();
-		simpleCommonElements = simpleCommonElements.mergeLists(l1, l2);
-		
-		
-		return simpleCommonElements;
+		MySimpleLinkedList l3 = new MySimpleLinkedList();
+		l3 = l3.mergeLists(l1, l2); // inserta los nodos en común desordenados
+		Mergesort.sort(l3); //ordena los nodos de l3
+
+		return l3;
 	}
 
 	public MySimpleLinkedList mergeLists(MySimpleLinkedList l1, MySimpleLinkedList l2) {
 
-		MySimpleLinkedList simpleCommonElements = new MySimpleLinkedList();
+		//MySimpleLinkedList simpleCommonElements = new MySimpleLinkedList();
 		// Agrego l1 a la lista que luego voy a ordenar
 		Node tmp1 = l1.getFirst();
+		Node tmp2 = l2.getFirst();
+		MySimpleLinkedList l3 = new MySimpleLinkedList();
 		for (int i = 0; i < l1.getSize(); i++) {
-			simpleCommonElements.insertAtLast(tmp1.getInfo());
+
+			for (int j = 0; j < l2.getSize(); j++) {
+				if (tmp2.getInfo() == tmp1.getInfo()) {
+					l3.insertAtLast(tmp2.getInfo());
+				}
+				if (tmp2.getNext() != null) {
+					tmp2 = tmp2.getNext();
+				}
+			}
+			tmp2 = l2.getFirst(); // Vuelvo al principio de la lista
 			if (tmp1.getNext() != null) {
-				
 				tmp1 = tmp1.getNext();
 			}
-
 		}
-		Node tmp2 = l2.getFirst();
-		for (int i = 0; i < l2.getSize(); i++) {
-			simpleCommonElements.insertAtLast(tmp2.getInfo());
-			if (tmp2.getNext() != null) {
-				
-				tmp2 = tmp2.getNext();
-			}
-
-		}
-		return simpleCommonElements;
+		return l3;
 	}
 
 	public Node getFirst() {

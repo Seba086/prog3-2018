@@ -1,19 +1,19 @@
 public class Mergesort {
-	private int[] numbers;
-	private int[] helper;
-	private int number;
+	private static MySimpleLinkedList numbers;
+	private static int[] helper;
+	private static int number;
 
-	public void sort(int[] values) {
-		this.numbers = values;
-		number = values.length;
-		this.helper = new int[number];
+	public static void sort(MySimpleLinkedList values) {
+		numbers = values;
+		number = values.getSize();
+		helper = new int[number];
 		mergesort(0, number - 1);
 	}
 
-	private void merge(int low, int middle, int high) {
+	private static void merge(int low, int middle, int high) {
 		// copier ambas partes al array helper
 		for (int i = low; i <= high; i++) {
-			helper[i] = numbers[i];
+			helper[i] = numbers.nodeAt(i).getInfo();
 		}
 		int i = low;
 		int j = middle + 1;
@@ -22,28 +22,28 @@ public class Mergesort {
 		// mitad izquierda o de la derecho
 		while (i <= middle && j <= high) {
 			if (helper[i] <= helper[j]) {
-				numbers[k] = helper[i];
+				numbers.nodeAt(k).setInfo(helper[i]);
 				i++;
 			} else {
-				numbers[k] = helper[j];
+				numbers.nodeAt(k).setInfo(helper[j]);
 				j++;
 			}
 			k++;
 		}
 		// si quedaron elementos copiarlos al array original
 		while (i <= middle) {
-			numbers[k] = helper[i];
+			numbers.nodeAt(k).setInfo(helper[i]);
 			k++;
 			i++;
 		}
 		while (j <= high) {
-			numbers[k] = helper[j];
+			numbers.nodeAt(k).setInfo(helper[j]);
 			k++;
 			j++;
 		}
 	}
 
-	private void mergesort(int low, int high) {
+	private static void mergesort(int low, int high) {
 		// si low es menor que high continua el ordenamiento
 		// si low no es menor que high entonces el array está ordenado
 		if (low < high) {

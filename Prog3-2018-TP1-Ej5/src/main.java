@@ -13,24 +13,53 @@ public class main {
 		MySimpleLinkedList l1 = new MySimpleLinkedList();
 		MySimpleLinkedList l2 = new MySimpleLinkedList();
 		MySimpleLinkedList l3 = new MySimpleLinkedList();
-		int infoNumbers1[] = {5,7,3,15,33};
-		int infoNumbers2[] = {23,1,17,9,44};
+		MySimpleLinkedList l4 = new MySimpleLinkedList();
+		MySimpleLinkedList listaResultante1 = new MySimpleLinkedList();
+		MySimpleLinkedList listaResultante2 = new MySimpleLinkedList();
+		int listaDesordenada1[] =  {23,8,17,5,8,44,7};
+		int listaDesordenada2[] = {23,5,7,3,15,33,8,44,17};
+		int listaOrdenada1[] = {1,3,5,7,9,11,13};
+		int listaOrdenada2[] = {7,9,11,13,15,17};
 		
-		Timer t = new Timer();
-		int rnd;
-
-		for (int i=0; i<5; i++) {
-			l1.insertAtLast(infoNumbers1[i]);
-			l2.insertAtLast(infoNumbers2[i]);
+		for (int i=0; i<listaDesordenada1.length; i++) {
+			l1.insertAtLast(listaDesordenada1[i]);
 		}
-		l1.print(5);
-		System.out.println("l1: " + l1.getSize());
-		l2.print(5);
-		System.out.println("l2 size: " + l2.getSize());
+		for (int i=0; i<listaDesordenada2.length; i++) {
+			l2.insertAtLast(listaDesordenada2[i]);
+		}
+		for (int i=0; i<listaOrdenada1.length; i++) {
+			l3.insertAtLast(listaOrdenada1[i]);
+		}
+		for (int i=0; i<listaOrdenada2.length; i++) {
+			l4.insertAtLast(listaOrdenada2[i]);
+		}			
+		listaResultante1 = listaResultante1.simpleCommonElements(l1, l2);
+		listaResultante2 = listaResultante2.simpleCommonElements(l3, l4);
 		
-		l3 = l3.simpleCommonElements(l1, l2);
-		l3.print(l1.getSize() + l2.getSize());
-		System.out.println("simpleCommonElements size: " + l3.getSize());
+		System.out.println("Tamaño de la Lista resultante1: " + listaResultante1.getSize());
+		Node tmp = listaResultante1.getFirst();
+		for (int i=0; i<listaResultante1.getSize(); i++) {
+			System.out.print(tmp.getInfo() + " > ");
+			if(tmp.getNext() != null) {
+				tmp = tmp.getNext();
+			}
+			else {
+				System.out.println(" null ");
+			}
+			
+		}
+		System.out.println("Tamaño de la Lista resultante2: " + listaResultante2.getSize());
+		Node tmp2 = listaResultante2.getFirst();
+		for (int i=0; i<listaResultante2.getSize(); i++) {
+			System.out.print(tmp2.getInfo() + " > ");
+			if(tmp2.getNext() != null) {
+				tmp2 = tmp2.getNext();
+			}
+			else {
+				System.out.println(" null ");
+			}
+			
+		}
 	}
 
 }
